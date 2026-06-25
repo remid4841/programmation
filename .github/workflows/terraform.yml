@@ -26,40 +26,28 @@ jobs:
         with:
           terraform_wrapper: false
 
-      # -----------------------------------------------------------------------
-      # TODO: Add a Terraform Format step to check that all .tf files are
-      #       properly formatted. Hint — the step skeleton looks like:
-      #
-      # - name: Terraform Format
-      #   id: fmt
-      #   run: terraform fmt .....
-      #   working-directory: ./terraform
-      # -----------------------------------------------------------------------
+      # --- Terraform Format ---
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+        working-directory: ./terraform
 
-      # -----------------------------------------------------------------------
-      # TODO: Add a Terraform Init step to initialise the working directory.
-      #       Hint — the step skeleton looks like:
-      #
-      # - name: Terraform Init
-      #   id: init
-      #   run: terraform init .....
-      #   working-directory: ./terraform
-      # -----------------------------------------------------------------------
+      # --- Terraform Init ---
+      - name: Terraform Init
+        id: init
+        run: terraform init
+        working-directory: ./terraform
 
-      # -----------------------------------------------------------------------
-      # TODO: Add a Terraform Plan step to preview the changes Terraform will
-      #       make. Hint — the step skeleton looks like:
-      #
-      # - name: Terraform Plan
-      #   id: plan
-      #   run: terraform plan .....
-      #   working-directory: ./terraform
-      #   continue-on-error: true
-      #
-      # - name: Terraform Plan Status
-      #   if: steps.plan.outcome == 'failure'
-      #   run: exit 1
-      # -----------------------------------------------------------------------
+      # --- Terraform Plan ---
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -input=false
+        working-directory: ./terraform
+        continue-on-error: true
+
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
 
       - name: Checkov - Terraform Security Scan
         id: checkov
@@ -81,12 +69,11 @@ jobs:
             echo "$line" >> $GITHUB_STEP_SUMMARY
           done < results_github_failed_only.md
 
-      # -----------------------------------------------------------------------
-      # TODO: Add the Infracost setup action to install the Infracost CLI and
-      #       authenticate with your API key.
-      #       Hint — use the action: infracost/actions/setup@v3
-      #              and pass api-key: ${{ secrets.INFRACOST_API_KEY }}
-      # -----------------------------------------------------------------------
+      # --- Infracost Setup ---
+      - name: Infracost Setup
+        uses: infracost/actions/setup@v3
+        with:
+          api-key: ${{ secrets.INFRACOST_API_KEY }}
 
       - name: Infracost Breakdown
         id: infracost
@@ -95,19 +82,16 @@ jobs:
           infracost output --path /tmp/infracost.json --format table --out-file /tmp/infracost-table.txt
           cat /tmp/infracost-table.txt
 
-      # -----------------------------------------------------------------------
-      # TODO: Add a Terraform Apply step to deploy the infrastructure.
-      #       Hint — the step skeleton looks like:
-      #
-      # - name: Terraform Apply
-      #   run: terraform apply .....
-      #   working-directory: ./terraform
-      # -----------------------------------------------------------------------
+      # --- Terraform Apply ---
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        working-directory: ./terraform
 
-      # -----------------------------------------------------------------------
-      # TODO (bonus): Once Infracost is set up, publish its cost table to the
-      #               GitHub job summary using $GITHUB_STEP_SUMMARY.
-      # -----------------------------------------------------------------------
+      # --- Bonus: Infracost Summary ---
+      - name: Publish Infracost Summary
+        run: |
+          echo "## Infracost Report" >> $GITHUB_STEP_SUMMARY
+          cat /tmp/infracost-table.txt >> $GITHUB_STEP_SUMMARY
 
       - name: Install Python 3
         uses: actions/setup-python@v5
