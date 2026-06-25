@@ -1,0 +1,61 @@
+---
+- name: YNOV TP 2 deployment
+  hosts: all
+  become: yes
+  become_method: sudo
+  become_user: root
+  vars:
+    nginx_port: 90
+    cache_duration: 1y
+    cache_no_store: -1y
+    enable_error_page: true
+
+  tasks:
+    - name: install nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: création repertoire
+      file:
+        path: /var/www/html/olympic-games-starter
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: '0755'
+
+    - name: copie fichier dans angular
+      copy:
+        src: app/olympic-games-starter/
+        dest: /var/www/html/olympic-games-starter/
+
+    - name: copie conf nginx
+      template :
+        src: app.conf.j2
+        dest: /etc/nginx/sites-available/app.conf
+      notify: redemarrer nginx
+
+    - name: activer site nginx
+      file:
+        src: /etc/nginx/sites-available/app.conf
+        dest: /etc/nginx/sites-enabled/app.conf
+        state: link
+      notify: redemarrer nginx
+
+    - name: désactiver le site nginx par default
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+      notify: redemarrer nginx
+
+    - name: demarrer et activer nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+  handlers:
+    - name: redemarrer nginx
+      service:
+        name: nginx
+        state: restarted

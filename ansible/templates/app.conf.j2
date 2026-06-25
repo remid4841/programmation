@@ -1,0 +1,29 @@
+server {
+    listen       {{ nginx_port }} default_server;
+    
+    location / {
+      root   /var/www/html/olympic-games-starter;
+      index  index.html;
+      try_files $uri $uri/ /index.html;
+    }
+    
+    {% if enable_error_page %}
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+        root   /usr/share/nginx/html;
+        }
+    {% endif %}
+
+    location ~* (\.html|\/sw\.js)$ {
+      root   /var/www/html/olympic-games-starter;
+      expires {{ cache_no_store }};
+      add_header Pragma "no-cache";
+      add_header Cache-Control "public";
+    }
+    
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|json)$ {
+      root   /var/www/html/olympic-games-starter;
+      expires {{ cache_duration }};
+      add_header Cache-Control "public, immutable";
+    }
+}

@@ -1,0 +1,82 @@
+]8;id=106571;https://ansible-lint.readthedocs.io/rules/schema/\[1;91mschema[playbook][0m]8;;\[2m:[0m [91m'become_method' must be one of the currently available values: ansible.builtin.runas, ansible.builtin.su, ansible.builtin.sudo, ansible.netcommon.enable, community.general.doas, community.general.dzdo, community.general.ksu, community.general.machinectl, community.general.pbrun, community.general.pfexec, community.general.pmrun, community.general.sesu, community.general.sudosu, containers.podman.podman_unshare[0m
+[34mdeploy.yml[0m:2 [2m Returned errors will not include exact line numbers, but they will mention[0m
+[2mthe schema name being used as a tag, like ``schema[playbook]``,[0m
+[2m``schema[tasks]``.[0m
+
+[2mThis rule is not skippable and stops further processing of the file.[0m
+
+[2mIf incorrect schema was picked, you might want to either:[0m
+
+[2m* move the file to standard location, so its file is detected correctly.[0m
+[2m* use ``kinds:`` option in linter config to help it pick correct file type.[0m
+
+
+]8;id=844729;https://ansible-lint.readthedocs.io/rules/yaml/\[1;91myaml[truthy][0m]8;;\[2m:[0m [91mTruthy value should be one of [false, true][0m
+[34mdeploy.yml[0m:4
+
+]8;id=814782;https://ansible-lint.readthedocs.io/rules/fqcn/\[1;91mfqcn[action-core][0m]8;;\[2m:[0m [91mUse FQCN for builtin module actions (apt).[0m
+[34mdeploy.yml[0m:14 [2mUse `ansible.builtin.apt` or `ansible.legacy.apt` instead.[0m
+
+]8;id=376444;https://ansible-lint.readthedocs.io/rules/name/\[1;91mname[casing][0m]8;;\[2m:[0m [91mAll names should start with an uppercase letter.[0m
+[34mdeploy.yml[0m:14 [2mTask/Handler: install nginx[0m
+
+]8;id=951565;https://ansible-lint.readthedocs.io/rules/yaml/\[1;91myaml[truthy][0m]8;;\[2m:[0m [91mTruthy value should be one of [false, true][0m
+[34mdeploy.yml[0m:18
+
+]8;id=375836;https://ansible-lint.readthedocs.io/rules/fqcn/\[1;91mfqcn[action-core][0m]8;;\[2m:[0m [91mUse FQCN for builtin module actions (file).[0m
+[34mdeploy.yml[0m:20 [2mUse `ansible.builtin.file` or `ansible.legacy.file` instead.[0m
+
+]8;id=49195;https://ansible-lint.readthedocs.io/rules/name/\[1;91mname[casing][0m]8;;\[2m:[0m [91mAll names should start with an uppercase letter.[0m
+[34mdeploy.yml[0m:20 [2mTask/Handler: création repertoire[0m
+
+]8;id=801394;https://ansible-lint.readthedocs.io/rules/fqcn/\[1;91mfqcn[action-core][0m]8;;\[2m:[0m [91mUse FQCN for builtin module actions (copy).[0m
+[34mdeploy.yml[0m:28 [2mUse `ansible.builtin.copy` or `ansible.legacy.copy` instead.[0m
+
+]8;id=829411;https://ansible-lint.readthedocs.io/rules/name/\[1;91mname[casing][0m]8;;\[2m:[0m [91mAll names should start with an uppercase letter.[0m
+[34mdeploy.yml[0m:28 [2mTask/Handler: copie fichier dans angular[0m
+
+]8;id=465896;https://ansible-lint.readthedocs.io/rules/risky-file-permissions/\[1;91mrisky-file-permissions[0m]8;;\[2m:[0m [91mFile permissions unset or incorrect.[0m
+[34mdeploy.yml[0m:28 [2mTask/Handler: copie fichier dans angular[0m
+
+]8;id=645374;https://ansible-lint.readthedocs.io/rules/fqcn/\[1;91mfqcn[action-core][0m]8;;\[2m:[0m [91mUse FQCN for builtin module actions (template).[0m
+[34mdeploy.yml[0m:33 [2mUse `ansible.builtin.template` or `ansible.legacy.template` instead.[0m
+
+]8;id=561483;https://ansible-lint.readthedocs.io/rules/name/\[1;91mname[casing][0m]8;;\[2m:[0m [91mAll names should start with an uppercase letter.[0m
+[34mdeploy.yml[0m:33 [2mTask/Handler: copie conf nginx[0m
+
+]8;id=949577;https://ansible-lint.readthedocs.io/rules/risky-file-permissions/\[1;91mrisky-file-permissions[0m]8;;\[2m:[0m [91mFile permissions unset or incorrect.[0m
+[34mdeploy.yml[0m:33 [2mTask/Handler: copie conf nginx[0m
+
+]8;id=153562;https://ansible-lint.readthedocs.io/rules/yaml/\[1;91myaml[colons][0m]8;;\[2m:[0m [91mToo many spaces before colon[0m
+[34mdeploy.yml[0m:34
+
+]8;id=396251;https://ansible-lint.readthedocs.io/rules/fqcn/\[1;91mfqcn[action-core][0m]8;;\[2m:[0m [91mUse FQCN for builtin module actions (file).[0m
+[34mdeploy.yml[0m:39 [2mUse `ansible.builtin.file` or `ansible.legacy.file` instead.[0m
+
+]8;id=778997;https://ansible-lint.readthedocs.io/rules/name/\[1;91mname[casing][0m]8;;\[2m:[0m [91mAll names should start with an uppercase letter.[0m
+[34mdeploy.yml[0m:39 [2mTask/Handler: activer site nginx[0m
+
+]8;id=135868;https://ansible-lint.readthedocs.io/rules/fqcn/\[1;91mfqcn[action-core][0m]8;;\[2m:[0m [91mUse FQCN for builtin module actions (file).[0m
+[34mdeploy.yml[0m:46 [2mUse `ansible.builtin.file` or `ansible.legacy.file` instead.[0m
+
+]8;id=124653;https://ansible-lint.readthedocs.io/rules/name/\[1;91mname[casing][0m]8;;\[2m:[0m [91mAll names should start with an uppercase letter.[0m
+[34mdeploy.yml[0m:46 [2mTask/Handler: désactiver le site nginx par default[0m
+
+]8;id=391203;https://ansible-lint.readthedocs.io/rules/fqcn/\[1;91mfqcn[action-core][0m]8;;\[2m:[0m [91mUse FQCN for builtin module actions (service).[0m
+[34mdeploy.yml[0m:52 [2mUse `ansible.builtin.service` or `ansible.legacy.service` instead.[0m
+
+]8;id=2425;https://ansible-lint.readthedocs.io/rules/name/\[1;91mname[casing][0m]8;;\[2m:[0m [91mAll names should start with an uppercase letter.[0m
+[34mdeploy.yml[0m:52 [2mTask/Handler: demarrer et activer nginx[0m
+
+]8;id=140775;https://ansible-lint.readthedocs.io/rules/yaml/\[1;91myaml[truthy][0m]8;;\[2m:[0m [91mTruthy value should be one of [false, true][0m
+[34mdeploy.yml[0m:56
+
+]8;id=383552;https://ansible-lint.readthedocs.io/rules/fqcn/\[1;91mfqcn[action-core][0m]8;;\[2m:[0m [91mUse FQCN for builtin module actions (service).[0m
+[34mdeploy.yml[0m:58 [2mUse `ansible.builtin.service` or `ansible.legacy.service` instead.[0m
+
+]8;id=226280;https://ansible-lint.readthedocs.io/rules/name/\[1;91mname[casing][0m]8;;\[2m:[0m [91mAll names should start with an uppercase letter.[0m
+[34mdeploy.yml[0m:58 [2mTask/Handler: redemarrer nginx[0m
+
+]8;id=562339;https://ansible-lint.readthedocs.io/rules/yaml/\[1;91myaml[new-line-at-end-of-file][0m]8;;\[2m:[0m [91mNo new line character at the end of file[0m
+[34mdeploy.yml[0m:61
+
