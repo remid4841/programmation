@@ -88,10 +88,10 @@ jobs:
         working-directory: ./terraform
 
       # --- Bonus: Infracost Summary ---
-      - name: Publish Infracost Summary
-        run: |
-          echo "## Infracost Report" >> $GITHUB_STEP_SUMMARY
-          cat /tmp/infracost-table.txt >> $GITHUB_STEP_SUMMARY
+      #- name: Publish Infracost Summary
+      #  run: |
+      #    echo "## Infracost Report" >> $GITHUB_STEP_SUMMARY
+      #    cat /tmp/infracost-table.txt >> $GITHUB_STEP_SUMMARY
 
       - name: Install Python 3
         uses: actions/setup-python@v5
