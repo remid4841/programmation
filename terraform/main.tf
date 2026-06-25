@@ -101,3 +101,7 @@ resource "aws_instance" "web_instance" {
   subnet_id              = aws_subnet.public_subnet.id
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 }
+
+resource "aws_s3_bucket" "my_bucket" {
+  bucket = "my-bucket"
+}
