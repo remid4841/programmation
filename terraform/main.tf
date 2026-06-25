@@ -13,32 +13,32 @@ terraform {
 ##################################################################################
 
 provider "aws" {
-	region				= "us-east-1"
-	access_key			= "test"
-	secret_key			= "test"
-	skip_credentials_validation	= true
-	skip_metadata_api_check		= true
-	skip_requesting_account_id	= true
-	s3_use_path_style		= true
-	
-	endpoints {
-		ec2		= "http://localhost:4566"
-		iam		= "http://localhost:4566"
-		route53         = "http://localhost:4566"
-		s3              = "http://localhost:4566"
-		ssm             = "http://localhost:4566"
-		sts             = "http://localhost:4566"
-		elbv2           = "http://localhost:4566"
-		autoscaling     = "http://localhost:4566"
-		cloudwatch      = "http://localhost:4566"
-		cloudwatchlogs  = "http://localhost:4566"
-	}
+  region                      = "us-east-1"
+  access_key                  = "test"
+  secret_key                  = "test"
+  skip_credentials_validation = true
+  skip_metadata_api_check     = true
+  skip_requesting_account_id  = true
+  s3_use_path_style           = true
+
+  endpoints {
+    ec2            = "http://localhost:4566"
+    iam            = "http://localhost:4566"
+    route53        = "http://localhost:4566"
+    s3             = "http://localhost:4566"
+    ssm            = "http://localhost:4566"
+    sts            = "http://localhost:4566"
+    elbv2          = "http://localhost:4566"
+    autoscaling    = "http://localhost:4566"
+    cloudwatch     = "http://localhost:4566"
+    cloudwatchlogs = "http://localhost:4566"
+  }
 }
 
 ##################################################################################
 # DATA
 ##################################################################################
- 
+
 data "aws_ssm_parameter" "amzn2_linux" {
   name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
@@ -96,8 +96,8 @@ resource "aws_security_group" "web_sg" {
 
 # 7. Instance EC2
 resource "aws_instance" "web_instance" {
-  ami           = data.aws_ssm_parameter.amzn2_linux.value
-  instance_type = "t2.micro"
-  subnet_id     = aws_subnet.public_subnet.id
+  ami                    = data.aws_ssm_parameter.amzn2_linux.value
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.public_subnet.id
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 }
